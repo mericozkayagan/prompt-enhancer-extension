@@ -1,0 +1,144 @@
+{
+  "name": "prompt-enhancer-extension",
+  "displayName": "Prompt Enhancer",
+  "description": "Enhances given text using AI models",
+  "version": "1.0.0",
+  "publisher": "mericozkayagan",
+  "author": {
+    "name": "Meriç Özkayagan"
+  },
+  "icon": "media/logo.png",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "vscode",
+    "text",
+    "ai",
+    "enhance",
+    "openai",
+    "claude",
+    "deepseek",
+    "azure"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mericozkayagan/prompt-enhancer-extension.git"
+  },
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:prompt-enhancer.enhancePrompt"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "prompt-enhancer.enhancePrompt",
+        "title": "Enhance Prompt",
+        "icon": "$(sparkle)"
+      }
+    ],
+    "configuration": {
+      "title": "Prompt Enhancer",
+      "properties": {
+        "promptEnhancer.modelType": {
+          "type": "string",
+          "default": "openai",
+          "enum": [
+            "openai",
+            "deepseek",
+            "azure_openai",
+            "claude"
+          ],
+          "enumDescriptions": [
+            "Use OpenAI model for prompt enhancement",
+            "Use Deepseek model for prompt enhancement",
+            "Use Azure OpenAI model for prompt enhancement",
+            "Use Claude model for prompt enhancement"
+          ],
+          "description": "Select the AI model to use for text enhancement"
+        },
+        "promptEnhancer.openaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for OpenAI"
+        },
+        "promptEnhancer.deepseekApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for Deepseek"
+        },
+        "promptEnhancer.azureOpenaiEndpoint": {
+          "type": "string",
+          "default": "",
+          "description": "Endpoint URL for Azure OpenAI"
+        },
+        "promptEnhancer.azureOpenaiApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for Azure OpenAI"
+        },
+        "promptEnhancer.claudeApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key for Claude"
+        },
+        "promptEnhancer.enhancementInstruction": {
+          "type": "string",
+          "default": "# Prompt Enhancement Instructions\n\nRead all input carefully and reason through your approach before answering or implementing any changes.\n\nYou are an expert prompt engineer with extensive experience crafting effective prompts for AI code assistants. Your goal is to enhance the user's prompt by making it:\n1. More specific and detailed\n2. Better structured with clear organization\n3. Contextually rich with relevant information\n4. Implementation-oriented with step-by-step guidance when appropriate\n\n## Process for Enhancing Prompts\n1. First, understand the underlying intent of the original prompt\n2. Identify missing context or details that would be helpful\n3. Restructure the prompt with clear sections if needed\n4. Add specific examples or expected outcomes if applicable\n5. Include relevant technical constraints or requirements\n\n## Examples of Enhanced Prompts\n\nEXAMPLE 1:\nOriginal: \"Fix this code\"\nEnhanced: \"I'm encountering an error in my JavaScript function that calculates totals for an e-commerce shopping cart. When adding items with decimal prices, the total is incorrectly rounded. Please analyze the calculateTotal() function in cart.js and suggest fixes for proper decimal handling in JavaScript. The expected behavior should maintain precision up to 2 decimal places.\"\n\nEXAMPLE 2:\nOriginal: \"Create a login page\"\nEnhanced: \"Please help me create a secure login page for my React application with the following requirements:\n1. Email and password fields with proper validation\n2. Error handling for incorrect credentials\n3. Integration with our existing user authentication API at '/api/auth/login'\n4. Remember me functionality using secure cookies\n5. Responsive design that matches our current UI theme\n\nInclude code examples for both the React component and the validation logic.\"\n\nEXAMPLE 3:\nOriginal: \"How do I implement dark mode?\"\nEnhanced: \"I want to implement a dark mode toggle in my Vue.js application. Please help me:\n1. Set up a theme system with CSS variables for colors\n2. Create a toggle component that switches between light/dark themes\n3. Store the user's preference in localStorage\n4. Ensure the theme persists between sessions\n5. Apply the theme across all components\n\nI'm using Vue 3 with Composition API and Tailwind CSS for styling.\"\n\nNow enhance the following prompt while maintaining its original intent:",
+          "description": "The instruction to send to the AI model for text enhancement. You can customize this to provide your own enhancement instructions."
+        }
+      }
+    },
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "prompt-enhancer",
+          "title": "Prompt Enhancer",
+          "icon": "$(sparkle)"
+        }
+      ]
+    },
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "prompt-enhancer.enhancePrompt"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "prompt-enhancer.enhancePrompt",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "prompt-enhancer.enhancePrompt",
+        "key": "alt+e",
+        "mac": "alt+e"
+      }
+    ]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "tsc -p ./",
+    "package": "vsce package",
+    "watch": "tsc -watch -p ./",
+    "dev": "npm run watch"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@types/vscode": "^1.80.0",
+    "@vscode/vsce": "^2.24.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.9",
+    "@types/node-fetch": "^2.6.4",
+    "dotenv": "^16.4.5"
+  }
+}
