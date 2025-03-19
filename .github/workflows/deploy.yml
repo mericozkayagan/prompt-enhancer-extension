@@ -33,8 +33,11 @@ jobs:
       - name: Compile TypeScript
         run: npm run compile
 
+      - name: Bundle with webpack
+        run: npm run webpack
+
       - name: Package extension
-        run: npm run package
+        run: npx @vscode/vsce package
 
       - name: Upload VSIX as artifact
         uses: actions/upload-artifact@v4
@@ -108,6 +111,7 @@ jobs:
             Thank you for trying Prompt Enhancer! Feedback and contributions are welcome.
         env:
           GITHUB_TOKEN: ${{ secrets.PROMPT_ENHANCER_PAT }}
+
       - name: Publish to Visual Studio Marketplace
         if: success()
         run: npx @vscode/vsce publish -p ${{ secrets.VSCE_PAT }}

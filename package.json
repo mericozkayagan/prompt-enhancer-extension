@@ -32,7 +32,7 @@
     "onStartupFinished",
     "onCommand:prompt-enhancer.enhancePrompt"
   ],
-  "main": "dist/extension.js",
+  "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
@@ -128,7 +128,7 @@
     "compile": "tsc -p ./",
     "webpack": "webpack --config webpack.config.js",
     "webpack:dev": "webpack --mode development --config webpack.config.js",
-    "package": "webpack --config webpack.config.js && vsce package",
+    "package": "webpack --config webpack.config.js && npx @vscode/vsce package",
     "watch": "webpack --watch --config webpack.config.js",
     "dev": "webpack --watch --config webpack.config.js"
   },
